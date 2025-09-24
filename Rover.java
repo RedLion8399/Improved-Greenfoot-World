@@ -1,260 +1,322 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.concurrent.Callable;
 
-public class Rover extends Actor
-{
+import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-    private Display anzeige;
+public class Rover extends Actor {
 
-    /**
-     * Die Anweisungen der Methode act werden ausgeführt, wenn der Act-Button
-     * im Hauptfenster geklickt wird.
-     */
-    public void act() 
-    {
-        fahre();
-        setzeMarke();
-        drehe("links");
-        fahre();
-        fahre();
-        setzeMarke();
-        drehe("links");
-        fahre();
-        fahre();
-        fahre();
-        setzeMarke();
-        drehe("links");
-        fahre();
-        fahre();
-        fahre();
-        fahre();
-    } 
+    private Display display;
+    private MessagePriority messagePriority = MessagePriority.INFO;
 
     /**
-     * Der Rover bewegt sich ein Feld in Fahrtrichtung weiter.
-     * Sollte sich in Fahrtrichtung ein Objekt der Klasse Huegel befinden oder er sich an der Grenze der Welt befinden,
-     * dann erscheint eine entsprechende Meldung auf dem Display.
+     * If the button "act" in the main window is clicked this method is executed.
      */
-    public void fahre()
-    {
+    public void act() {
+    }
+
+    /**
+     * The rover moves one field in the direction it is currently facing.
+     * If there is a n Object in front of the Rover does not move and displays a
+     * message.
+     */
+    public void drive() {
         int posX = getX();
         int posY = getY();
 
-        if(huegelVorhanden("vorne"))
-        {
-            nachricht("Zu steil!");
-        }
-        else if(getRotation()==270 && getY()==1)
-        {
-            nachricht("Ich kann mich nicht bewegen");
-        }
-        else
-        {
+        if (isHill(Direction.FOR)) {
+            message("Zu steil!", MessagePriority.ERROR);
+        } else if (getRotation() == 270 && getY() == 1) {
+            message("Ich kann mich nicht bewegen", MessagePriority.ERROR);
+        } else {
             move(1);
             Greenfoot.delay(1);
         }
 
-        if(posX==getX()&&posY==getY()&&!huegelVorhanden("vorne"))
-        {
-            nachricht("Ich kann mich nicht bewegen");
+        if (posX == getX() && posY == getY() && !isHill(Direction.FOR)) {
+            message("Ich kann mich nicht bewegen", MessagePriority.ERROR);
         }
     }
 
     /**
-     * Der Rover dreht sich um 90 Grad in die Richtung, die mit richtung („links“ oder „rechts“) übergeben wurde.
-     * Sollte ein anderer Text (String) als "rechts" oder "links" übergeben werden, dann erscheint eine entsprechende Meldung auf dem Display.
+     * The rover moves a given amount of steps in the direction it is currently
+     * facing
+     *
+     * @param amount The amount of steps to move
      */
-    public void drehe(String richtung)
-    {
-        if(richtung=="rechts")
-        {
-            turn(90);
-            //setRotation(getRotation()+90);
-        }
-        else if (richtung=="links")
-        {
-            turn(-90);
-            // setRotation(getRotation()-90);
-        }
-        else
-        {
-            nachricht("Befehl nicht korrekt!");
+    public void drive(int amount) {
+        for (int i = 0; i < amount; i++) {
+            drive();
         }
     }
 
     /**
-     * Der Rover gibt durch einen Wahrheitswert (true oder false )zurück, ob sich auf seiner 
-     * Position ein Objekt der Klasse Gestein befindet.
-     * Eine entsprechende Meldung erscheint auch auf dem Display.
+     * The rover moves a given amount of steps in the direction it is currently
+     * facing. After each step, the given function is executed.
+     * 
+     * @param amount   The amount of steps to move
+     * @param function The function to execute after each step
      */
-    public boolean gesteinVorhanden()
-    {
-        if(getOneIntersectingObject(Gestein.class)!=null)
-        {
-            nachricht("Gestein gefunden!");
+    public void drive(int amount, Runnable function) {
+        function.run();
+        for (int i = 0; i < amount; i++) {
+            drive();
+            function.run();
+        }
+    }
+
+    /**
+     * The rover moves until the given condition is false. After each step, the
+     * given function is executed.
+     * 
+     * @param condition The condition to check
+     * @param function  The function to execute after each step
+     */
+    public void drive(Callable<Boolean> condition, Runnable function) {
+        function.run();
+        try {
+            while (condition.call()) {
+                drive();
+                function.run();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            message("Bedingung nicht korrekt", MessagePriority.ERROR);
+        }
+    }
+
+    /**
+     * The rover moves until the given condition is false.
+     * 
+     * @param condition The condition to check
+     */
+    public void drive(Callable<Boolean> condition) {
+        try {
+            while (condition.call()) {
+                drive();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            message("Bedingung nicht korrekt", MessagePriority.ERROR);
+        }
+    }
+
+    /**
+     * Thr rover turns 90 degrees in the given direction.
+     * 
+     * @param richtung The direction to turn as Enum (RIGHT, LEFT)
+     */
+    public void turn(Direction richtung) {
+        switch (richtung) {
+            case RIGHT -> turn(90);
+            case LEFT -> turn(-90);
+            default -> message("Befehl nicht korrekt", MessagePriority.ERROR);
+        }
+    }
+
+    /**
+     * Thr rover turns 90 degrees in the given direction.
+     * 
+     * This method is only meant to be executed from the GUI directly and not from
+     * the code itself. Instead use the method with the Enum parameter to avoid
+     * errors.
+     * 
+     * The direction should be one of the following strings:
+     * "RIGHT", "right", "rechts", "R", "r"
+     * "LEFT", "left", "links", "L", "l"
+     * 
+     * @param direction The direction to turn as a string
+     */
+    public void turn(String direction) {
+        switch (direction) {
+            case "RIGHT", "right", "rechts", "R", "r" -> turn(Direction.RIGHT);
+            case "LEFT", "left", "links", "L", "l" -> turn(Direction.LEFT);
+            default -> message(direction + " ist kein g\u00FCltiger Befehl", MessagePriority.ERROR);
+        }
+    }
+
+    /**
+     * The rover checks if there is a Gestein directly below it.
+     * If the direction is not correct, a message is displayed.
+     * 
+     * @return True if there is a `Gestein`, false otherwise
+     */
+    public boolean isStoneBelow() {
+        if (getOneIntersectingObject(Gestein.class) != null) {
+            message("Gestein gefunden!");
             return true;
 
         }
 
-        nachricht("Kein Gestein vorhanden!");
+        message("Kein Gestein vorhanden!", MessagePriority.WARNING);
         return false;
     }
 
     /**
-     * Der Rover überprüft, ob sich in richtung ("rechts", "links", oder "vorne") ein Objekt der Klasse Huegel befindet.
-     * Das Ergebnis wird auf dem Display angezeigt.
-     * Sollte ein anderer Text (String) als "rechts", "links" oder "vorne" übergeben werden, dann erscheint eine entsprechende Meldung auf dem Display.
+     * The rover checks if there is a "Hill" in the given direction.
+     * If the direction is not correct, a message is displayed.
+     * 
+     * @param direction The direction to check as Enum (RIGHT, LEFT, FOR)
+     * 
+     * @return True if there is a "Hill", false otherwise
      */
-    public boolean huegelVorhanden(String richtung)
-    {
+    public boolean isHill(Direction direction) {
         int rot = getRotation();
 
-        if (richtung=="vorne" && rot==0 || richtung=="rechts" && rot==270 || richtung=="links" && rot==90)
-        {
-            if(getOneObjectAtOffset(1,0,Huegel.class)!=null)
-            {
+        if (direction == Direction.FOR && rot == 0 || direction == Direction.RIGHT && rot == 270
+                || direction == Direction.LEFT && rot == 90) {
+            if (getOneObjectAtOffset(1, 0, Huegel.class) != null) {
                 return true;
             }
         }
 
-        if (richtung=="vorne" && rot==180 || richtung=="rechts" && rot==90 || richtung=="links" && rot==270)
-        {
-            if(getOneObjectAtOffset(-1,0,Huegel.class)!=null)
-            {
+        if (direction == Direction.FOR && rot == 180 || direction == Direction.RIGHT && rot == 90
+                || direction == Direction.LEFT && rot == 270) {
+            if (getOneObjectAtOffset(-1, 0, Huegel.class) != null) {
                 return true;
             }
         }
 
-        if (richtung=="vorne" && rot==90 || richtung=="rechts" && rot==0 || richtung=="links" && rot==180)
-        {
-            if(getOneObjectAtOffset(0,1,Huegel.class)!=null)
-            {
+        if (direction == Direction.FOR && rot == 90 || direction == Direction.RIGHT && rot == 0
+                || direction == Direction.LEFT && rot == 180) {
+            if (getOneObjectAtOffset(0, 1, Huegel.class) != null) {
                 return true;
             }
 
         }
 
-        if (richtung=="vorne" && rot==270 || richtung=="rechts" && rot==180 || richtung=="links" && rot==0)
-        {
-            if(getOneObjectAtOffset(0,-1,Huegel.class)!=null)
-            {
+        if (direction == Direction.FOR && rot == 270 || direction == Direction.RIGHT && rot == 180
+                || direction == Direction.LEFT && rot == 0) {
+            if (getOneObjectAtOffset(0, -1, Huegel.class) != null) {
                 return true;
             }
 
         }
 
-        if(richtung!="vorne" && richtung!="links" && richtung!="rechts")
-        {
-            nachricht("Befehl nicht korrekt!");
+        if (direction != Direction.FOR && direction != Direction.LEFT && direction != Direction.RIGHT) {
+            message("Befehl nicht korrekt!", MessagePriority.ERROR);
         }
 
         return false;
     }
 
     /**
-     * Der Rover nimmt das Gestein auf seiner Position auf.
-     * Sollte kein Objekt der Klasse Gestein vorhanden sein, dann erscheint
-     * eine entsprechende Meldung auf dem Display.
+     * The rover picks up a Stone if there is one directly below it.
+     * If there is no Stone, a message is displayed.
      */
-    public void nimmGestein()
-    {
-        if(gesteinVorhanden())
-        {
+    public void takeStone() {
+        if (isStoneBelow()) {
             Greenfoot.delay(1);
             removeTouching(Gestein.class);
-        }
-        else 
-        {
-            nachricht("Hier ist kein Gestein");
+        } else {
+            message("Hier ist kein Gestein", MessagePriority.WARNING);
         }
     }
 
     /**
-     * Der Rover erzeugt ein Objekt der Klasse „Marke“ auf seiner Position.
+     * The rover places a "Marker" object on the current field.
+     * If there is already one, the Marker is not placed.
+     * 
+     * @param forcePlace If true, the Marker is placed even if there is already one
      */
-    public void setzeMarke()
-    {
-        getWorld().addObject(new Marke(), getX(), getY());
+    public void setMarker(boolean forcePlace) {
+        if (isMarker() && !forcePlace) {
+            return;
+        }
+        getWorld().addObject(new Marker(), getX(), getY());
     }
 
     /**
-     * *Der Rover gibt durch einen Wahrheitswert (true oder false )zurück,
-     * *ob sich auf seiner Position ein Objekt der Marke befindet.
-     * Eine entsprechende Meldung erscheint auch auf dem Display.
+     * Places a "Marker" object on the current field if there isn't already one.
      */
-    public boolean markeVorhanden()
-    {
-        if(getOneIntersectingObject(Marke.class)!=null)
-        {   nachricht("Marke gefunden!");
+    public void setMarker() {
+        setMarker(false);
+    }
+
+    /**
+     * The rover checks if there is a "Marker" object on the current field.
+     * 
+     * @return True if there is a "Marker", false otherwise
+     */
+    public boolean isMarker() {
+        if (getOneIntersectingObject(Marker.class) != null) {
+            message("Marke gefunden!");
             return true;
         }
 
-        nachricht("Keine Marke vorhanden!");
+        message("Keine Marke vorhanden!", MessagePriority.WARNING);
         return false;
     }
 
-    public void entferneMarke()
-    {
-        if(markeVorhanden())
-        {
-            removeTouching(Marke.class);
+    /**
+     * The rover removes a "Marker" object from the current field if there is one.
+     */
+    public void removeMarker() {
+        if (isMarker()) {
+            removeTouching(Marker.class);
         }
     }
 
-    private void nachricht(String pText)
-    {
-        if(anzeige!=null)
-        {
-            anzeige.anzeigen(pText);
-            Greenfoot.delay(1);
-            anzeige.loeschen();
+    private void message(String messageText, MessagePriority priority) {
+        if (display == null) {
+            return;
+        } else if (this.messagePriority.getPriority() > priority.getPriority()) {
+            return;
         }
+
+        display.display(messageText);
+        Greenfoot.delay(1);
+        display.delete();
     }
 
-    private void displayAusschalten()
-    {
-        getWorld().removeObject(anzeige);
+    private void message(String messageText) {
+        message(messageText, MessagePriority.INFO);
+    }
+
+    private void displayAusschalten() {
+        getWorld().removeObject(display);
 
     }
 
-    protected void addedToWorld(World world)
-    {
+    protected void addedToWorld(World world) {
 
         setImage("images/rover.png");
         world = getWorld();
-        anzeige = new Display();
-        anzeige.setImage("images/nachricht.png");
-        world.addObject(anzeige, 7, 0);
-        if(getY()==0)
-        {
-            setLocation(getX(),1);
+        display = new Display();
+        display.setImage("images/nachricht.png");
+        world.addObject(display, 7, 0);
+        if (getY() == 0) {
+            setLocation(getX(), 1);
         }
-        anzeige.anzeigen("Ich bin bereit");
+        display.display("Ich bin bereit");
 
     }
 
-    class Display extends Actor
-    {
-        GreenfootImage bild; 
+    class Display extends Actor {
+        GreenfootImage bild;
 
-        public Display()
-        {
+        public Display() {
             bild = getImage();
         }
 
-        public void act() 
-        {
-
-        }  
-
-        public void anzeigen(String pText)
-        {
-            loeschen();
-            getImage().drawImage(new GreenfootImage(pText, 25, Color.BLACK, new Color(0, 0, 0, 0)),10,10);
+        public void act() {
 
         }
 
-        public void loeschen()
-        {
+        /**
+         * Clears the current text from the display and then
+         * writes the given text onto the display.
+         * 
+         * @param messageText The text to write onto the display.
+         */
+        public void display(String messageText) {
+            delete();
+            getImage().drawImage(new GreenfootImage(messageText, 25, Color.BLACK, new Color(0, 0, 0, 0)), 10, 10);
+
+        }
+
+        /**
+         * Clears the text from the display
+         */
+        public void delete() {
             getImage().clear();
             setImage("images/nachricht.png");
         }

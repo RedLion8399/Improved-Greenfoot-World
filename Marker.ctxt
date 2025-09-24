@@ -1,8 +1,7 @@
 #BlueJ class context
-comment0.target=Gestein
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Gestein\ here.\r\n\ \r\n\ @author\ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.target=Marker
 comment1.params=
-comment1.target=Gestein()
+comment1.target=Marker()
 comment2.params=
 comment2.target=void\ act()
 comment2.text=\r\n\ Die\ Anweisungen\ der\ Methode\ act\ werden\ ausgef\u00FChrt,\ wenn\ der\ Act-Button\r\n\ im\ Hauptfenster\ geklickt\ wird.\r\n
