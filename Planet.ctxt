@@ -1,7 +1,10 @@
 #BlueJ class context
 comment0.target=Planet
-comment0.text=\r\n\ Die\ einzigen\ aktiven\ Akteure\ in\ der\ Roboterwelt\ sind\ die\ Roboter.\r\n\ Die\ Welt\ besteht\ aus\ 14\ *\ 10\ Feldern.\r\n
-comment1.params=
-comment1.target=Planet()
-comment1.text=\r\n\ Erschaffe\ eine\ Welt\ mit\ 15\ *\ 12\ Zellen.\r\n
-numComments=2
+comment0.text=\r\n\ The\ planet\ is\ the\ place\ where\ the\ actors\ can\ operate.\r\n\ \r\n\ @version\ 24\ September\ 2025\r\n\ @author\ Paul\ Jonas\ Dohle\r\n
+comment1.params=cols\ rows
+comment1.target=Planet(int,\ int)
+comment1.text=\r\n\ Creates\ a\ new\ world\ with\ the\ given\ number\ of\ columns\ and\ rows,\r\n\ where\ each\ cell\ is\ 50x50\ pixels.\r\n\ \r\n\ @param\ cols\ The\ number\ of\ columns\r\n\ @param\ rows\ The\ number\ of\ rows\r\n
+comment2.params=
+comment2.target=Planet()
+comment2.text=\r\n\ Creates\ a\ new\ world\ with\ 16\ columns\ and\ 12\ rows,\r\n\ where\ each\ cell\ is\ 50x50\ pixels.\r\n
+numComments=3

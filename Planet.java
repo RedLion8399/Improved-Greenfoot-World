@@ -1,21 +1,33 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Die einzigen aktiven Akteure in der Roboterwelt sind die Roboter.
- * Die Welt besteht aus 14 * 10 Feldern.
+ * The planet is the place where the actors can operate.
+ * 
+ * @version 24 September 2025
+ * @author Paul Jonas Dohle
  */
-
 public class Planet extends World {
     private static int zellenGroesse = 50;
 
     /**
-     * Erschaffe eine Welt mit 15 * 12 Zellen.
+     * Creates a new world with the given number of columns and rows,
+     * where each cell is 50x50 pixels.
+     * 
+     * @param cols The number of columns
+     * @param rows The number of rows
      */
-    public Planet() {
-        super(16, 12, zellenGroesse);
+    public Planet(int cols, int rows) {
+        super(cols, rows, zellenGroesse);
         setBackground("images/boden.png");
         setPaintOrder(String.class, Rover.class, Marker.class, Gestein.class, Huegel.class);
         Greenfoot.setSpeed(20);
     }
 
+    /**
+     * Creates a new world with 16 columns and 12 rows,
+     * where each cell is 50x50 pixels.
+     */
+    public Planet() {
+        this(16, 12);
+    }
 }
