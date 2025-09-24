@@ -1,5 +1,6 @@
 #BlueJ class context
 comment0.target=Rover
+comment0.text=\r\n\ The\ rover\ is\ a\ movable\ object\ that\ can\ be\ controlled\ by\ driving\ and\ turning.\r\n\ It\ can\ also\ interact\ with\ other\ objects\ in\ the\ world,\ such\ as\ picking\ up\r\n\ stones\ and\ marks\ and\ dropping\ them.\r\n\ It\ has\ the\ ability\ to\ check\ for\ hills,\ stones,\ and\ markers\ in\ its\ vicinity.\r\n\ \r\n\ @version\ 24\ September\ 2025\r\n\ @author\ Paul\ Jonas\ Dohle\r\n
 comment1.params=
 comment1.target=void\ act()
 comment1.text=\r\n\ If\ the\ button\ "act"\ in\ the\ main\ window\ is\ clicked\ this\ method\ is\ executed.\r\n

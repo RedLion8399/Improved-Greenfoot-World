@@ -2,6 +2,15 @@ import java.util.concurrent.Callable;
 
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
+/**
+ * The rover is a movable object that can be controlled by driving and turning.
+ * It can also interact with other objects in the world, such as picking up
+ * stones and marks and dropping them.
+ * It has the ability to check for hills, stones, and markers in its vicinity.
+ * 
+ * @version 24 September 2025
+ * @author Paul Jonas Dohle
+ */
 public class Rover extends Actor {
 
     private Display display;

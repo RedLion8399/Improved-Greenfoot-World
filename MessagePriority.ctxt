@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=MessagePriority
-comment0.text=\r\n\ An\ enumeration\ representing\ the\ priority\ levels\ of\ messages.\r\n\ They\ are\ used\ to\ control\ the\ display\ of\ messages\ based\ on\ their\ importance.\r\n\ \r\n\ The\ priority\ levels\ are\:\r\n\ \r\n\ @link\ MessagePriority\#INFO\r\n\ @link\ MessagePriority\#WARNING\r\n\ @link\ MessagePriority\#ERROR\r\n\ @link\ MessagePriority\#NONE\r\n\ \r\n\ @version\ 24\ September\ 2025\r\n\ @author\ Paul\ Jonas\ Dohle\r\n
+comment0.text=\r\n\ An\ enumeration\ representing\ the\ priority\ levels\ of\ messages.\r\n\ They\ are\ used\ to\ control\ the\ display\ of\ messages\ based\ on\ their\ importance.\r\n\ \r\n\ @link\ MessagePriority\#INFO\r\n\ @link\ MessagePriority\#WARNING\r\n\ @link\ MessagePriority\#ERROR\r\n\ @link\ MessagePriority\#NONE\r\n\ \r\n\ @version\ 24\ September\ 2025\r\n\ @author\ Paul\ Jonas\ Dohle\r\n
 comment1.params=PRIORITY
 comment1.target=MessagePriority(int)
 comment2.params=
