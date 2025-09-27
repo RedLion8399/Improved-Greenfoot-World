@@ -1,4 +1,15 @@
 #BlueJ class context
 comment0.target=Direction
 comment0.text=\r\n\ Directions\ are\ all\ posible\ movements\ for\ the\ rover.\r\n\ They\ are\ relative\ to\ the\ specific\ object\ instead\ of\r\n\ an\ absolute\ direction\ of\ a\ refference\ system.\r\n\ \r\n\ @link\ Direction\#RIGHT\r\n\ @link\ Direction\#LEFT\r\n\ @link\ Direction\#FOR\r\n\ @link\ Direction\#BACK\r\n\ \r\n\ @author\ Paul\ Jonas\ Dohle\r\n\ @version\ 27\ September\ 2025\r\n
-numComments=1
+comment1.params=ANGLE
+comment1.target=Direction(int)
+comment2.params=angle
+comment2.target=Direction\ fromAngle(int)
+comment2.text=\r\n\ Returns\ the\ direction\ with\ the\ given\ angle.\r\n\ \r\n\ @param\ angle\ the\ angle\ of\ the\ direction\r\n\ @return\ the\ direction\ with\ the\ given\ angle\r\n\ @throws\ IllegalArgumentException\ if\ there\ is\ no\ direction\ with\ the\ given\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ angle\r\n
+comment3.params=relativeDirection
+comment3.target=Direction\ getAbsoluteDirection(Direction)
+comment3.text=\r\n\ Returns\ the\ absolute\ direction\ of\ the\ given\ relative\ direction.\r\n\ It\ returns\ the\ absolute\ direction\ from\ a\ rotation\ from\ an\ actor's\r\n\ perspective.\r\n\ \r\n\ @param\ relativeDirection\ the\ relative\ direction\r\n\ @return\ the\ absolute\ direction\ of\ the\ given\ relative\ direction\r\n
+comment4.params=actor\ relativeDirection
+comment4.target=Direction\ getAbsoluteDirection(greenfoot.Actor,\ Direction)
+comment4.text=\r\n\ Returns\ the\ absolute\ direction\ of\ the\ given\ relative\ direction.\r\n\ It\ returns\ the\ absolute\ direction\ from\ the\ a\ rotation\ from\ an\ actors\r\n\ persspective.\r\n\ \r\n\ @param\ actor\ \ \ \ \ \ \ \ \ \ \ \ \ the\ actor\ whose\ rotation\ should\ be\ used\r\n\ @param\ relativeDirection\ the\ relative\ direction\r\n\ @return\ the\ absolute\ direction\ of\ the\ given\ relative\ direction\r\n
+numComments=5

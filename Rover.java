@@ -171,30 +171,26 @@ public class Rover extends Actor {
     public boolean isHill(Direction direction) {
         int rot = getRotation();
 
-        if (direction == Direction.FOR && rot == 0 || direction == Direction.RIGHT && rot == 270
-                || direction == Direction.LEFT && rot == 90) {
+        if (Direction.getAbsoluteDirection(this, direction) == Direction.RIGHT) {
             if (getOneObjectAtOffset(1, 0, Huegel.class) != null) {
                 return true;
             }
         }
 
-        if (direction == Direction.FOR && rot == 180 || direction == Direction.RIGHT && rot == 90
-                || direction == Direction.LEFT && rot == 270) {
+        if (Direction.getAbsoluteDirection(this, direction) == Direction.LEFT) {
             if (getOneObjectAtOffset(-1, 0, Huegel.class) != null) {
                 return true;
             }
         }
 
-        if (direction == Direction.FOR && rot == 90 || direction == Direction.RIGHT && rot == 0
-                || direction == Direction.LEFT && rot == 180) {
+        if (Direction.getAbsoluteDirection(this, direction) == Direction.BACK) {
             if (getOneObjectAtOffset(0, 1, Huegel.class) != null) {
                 return true;
             }
 
         }
 
-        if (direction == Direction.FOR && rot == 270 || direction == Direction.RIGHT && rot == 180
-                || direction == Direction.LEFT && rot == 0) {
+        if (Direction.getAbsoluteDirection(this, direction) == Direction.FOR) {
             if (getOneObjectAtOffset(0, -1, Huegel.class) != null) {
                 return true;
             }
