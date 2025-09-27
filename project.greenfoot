@@ -1,6 +1,7 @@
 #Greenfoot project file
 class.Gestein.image=gesetinKlasse.png
 class.Huegel.image=huegelKlasse.png
+class.Marker.image=markeKlasse.png
 class.Rover.image=roverKlasse.png
 dependency1.from=Planet
 dependency1.to=Rover
