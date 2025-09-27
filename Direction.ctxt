@@ -1,3 +1,4 @@
 #BlueJ class context
 comment0.target=Direction
+comment0.text=\r\n\ Directions\ are\ all\ posible\ movements\ for\ the\ rover.\r\n\ They\ are\ relative\ to\ the\ specific\ object\ instead\ of\r\n\ an\ absolute\ direction\ of\ a\ refference\ system.\r\n\ \r\n\ @link\ Direction\#RIGHT\r\n\ @link\ Direction\#LEFT\r\n\ @link\ Direction\#FOR\r\n\ @link\ Direction\#BACK\r\n\ \r\n\ @author\ Paul\ Jonas\ Dohle\r\n\ @version\ 27\ September\ 2025\r\n
 numComments=1

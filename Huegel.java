@@ -1,10 +1,10 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Huege here.
+ * The hill is an obstcale that the rover cannot drive over.
  * 
- * @author (your name)
- * @version (a version number or a date)
+ * @author Paul Jonas Dohle
+ * @version 27 September 2025
  */
 public class Huegel extends Actor {
 
@@ -12,6 +12,10 @@ public class Huegel extends Actor {
         setImage("images/huegel.png");
     }
 
+    /**
+     * If the button "act" in the main window is clicked this method is executed.
+     * The button "run" would execute this method as well, but in a loop.
+     */
     public void act() {
     }
 }

@@ -1,10 +1,10 @@
 import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Gestein here.
+ * The stone can be taken by a rover for but it cannot be placed again.
  * 
- * @author (your name)
- * @version (a version number or a date)
+ * @author Paul Jonas Dohle
+ * @version 27 September 2025
  */
 public class Gestein extends Actor {
 
@@ -17,10 +17,9 @@ public class Gestein extends Actor {
     }
 
     /**
-     * Die Anweisungen der Methode act werden ausgeführt, wenn der Act-Button
-     * im Hauptfenster geklickt wird.
+     * If the button "act" in the main window is clicked this method is executed.
+     * The button "run" would execute this method as well, but in a loop.
      */
     public void act() {
-
     }
 }
