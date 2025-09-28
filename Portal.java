@@ -10,6 +10,7 @@ public class Portal extends Actor {
 
     private Portal linkedPortal;
     private Display display;
+    private PortalType portalType;
 
     /**
      * Creates a new blue portal.
@@ -18,12 +19,18 @@ public class Portal extends Actor {
     public Portal() {
         setImage("images/portalBlue.png");
         display = Display.getInstance(getWorld());
+        portalType = PortalType.BLUE;
     }
 
     private Portal(int x, int y, Portal linkedPortal) {
         setImage("images/portalYellow.png");
         setLocation(x, y);
         this.linkedPortal = linkedPortal;
+        display = Display.getInstance(getWorld());
+    }
+
+    protected void addedToWorld(World world) {
+        createLinkedPortal();
     }
 
     /**
@@ -35,10 +42,16 @@ public class Portal extends Actor {
      * @param yOffset the y offset from the current portal's position
      */
     public void createLinkedPortal(int xOffset, int yOffset) {
-        if (linkedPortal == null) {
-            linkedPortal = new Portal(getX() + xOffset, getY() + yOffset, this);
-            getWorld().addObject(linkedPortal, getX() + xOffset, getY() + yOffset);
+        if (linkedPortal != null) {
+            return;
         }
+        if (getOneObjectAtOffset(xOffset, yOffset, null) != null) {
+            display.message("Cannot create linked portal here!");
+            return;
+        }
+
+        linkedPortal = new Portal(getX() + xOffset, getY() + yOffset, this);
+        getWorld().addObject(linkedPortal, getX() + xOffset, getY() + yOffset);
     }
 
     /**
@@ -61,5 +74,9 @@ public class Portal extends Actor {
         } else {
             display.message("No linked portal exists!");
         }
+    }
+
+    private enum PortalType {
+        BLUE, YELLOW;
     }
 }
