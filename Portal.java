@@ -18,16 +18,10 @@ public class Portal extends Actor {
         setImage("images/portalBlue.png");
     }
 
-    private Portal(int x, int y) {
+    private Portal(int x, int y, Portal linkedPortal) {
         setImage("images/portalYellow.png");
         setLocation(x, y);
-    }
-
-    /**
-     * If the button "act" in the main window is clicked this method is executed.
-     * The button "run" would execute this method as well, but in a loop.
-     */
-    public void act() {
+        this.linkedPortal = linkedPortal;
     }
 
     /**
@@ -40,7 +34,7 @@ public class Portal extends Actor {
      */
     public void createLinkedPortal(int xOffset, int yOffset) {
         if (linkedPortal == null) {
-            linkedPortal = new Portal(getX() + xOffset, getY() + yOffset);
+            linkedPortal = new Portal(getX() + xOffset, getY() + yOffset, this);
             getWorld().addObject(linkedPortal, getX() + xOffset, getY() + yOffset);
         }
     }
@@ -50,5 +44,20 @@ public class Portal extends Actor {
      */
     public void createLinkedPortal() {
         createLinkedPortal(1, 0);
+    }
+
+    /**
+     * Teleports the given actor to the linked portal's position.
+     * If no linked portal exists, an error message is displayed.
+     * 
+     * @param actor the actor to teleport
+     */
+    public void teleport(Actor actor) {
+        if (linkedPortal != null) {
+            actor.setLocation(linkedPortal.getX(), linkedPortal.getY());
+            Greenfoot.delay(1);
+        } else {
+            // Todo: Display error message
+        }
     }
 }

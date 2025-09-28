@@ -21,6 +21,7 @@ public class Rover extends Actor {
      * The button "run" would execute this method as well, but in a loop.
      */
     public void act() {
+        drive(2);
     }
 
     /**
@@ -39,6 +40,10 @@ public class Rover extends Actor {
         } else {
             move(1);
             Greenfoot.delay(1);
+            if (getOneIntersectingObject(Portal.class) != null) {
+                Portal portal = (Portal) getOneIntersectingObject(Portal.class);
+                portal.teleport(this);
+            }
         }
 
         if (posX == getX() && posY == getY() && !isHill(Direction.FOR)) {
@@ -304,7 +309,6 @@ public class Rover extends Actor {
         }
 
         public void act() {
-
         }
 
         /**
