@@ -9,7 +9,8 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Display extends Actor {
 
-    private static Display instance = null;
+    /** The single instance of the Display class */
+    protected static Display instance = null;
     /** The priority of messages is displayed */
     public MessagePriority messagePriority;
 

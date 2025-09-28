@@ -16,11 +16,16 @@ public class Planet extends World {
      * @param cols The number of columns
      * @param rows The number of rows
      */
+
+    private Display display;
+
     public Planet(int cols, int rows) {
         super(cols, rows, zellenGroesse);
         setBackground("images/boden.png");
         setPaintOrder(String.class, Rover.class, Marker.class, Gestein.class, Huegel.class);
         Greenfoot.setSpeed(20);
+        Display.instance = null;
+        display = Display.getInstance(this);
     }
 
     /**

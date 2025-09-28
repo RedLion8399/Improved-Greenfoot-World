@@ -9,6 +9,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Portal extends Actor {
 
     private Portal linkedPortal;
+    private Display display = Display.getInstance(getWorld());
 
     /**
      * Creates a new blue portal.
@@ -57,7 +58,7 @@ public class Portal extends Actor {
             actor.setLocation(linkedPortal.getX(), linkedPortal.getY());
             Greenfoot.delay(1);
         } else {
-            // Todo: Display error message
+            display.message("No linked portal exists!");
         }
     }
 }
