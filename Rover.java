@@ -39,6 +39,10 @@ public class Rover extends Actor {
         } else {
             move(1);
             Greenfoot.delay(1);
+            if (getOneIntersectingObject(Portal.class) != null) {
+                Portal portal = (Portal) getOneIntersectingObject(Portal.class);
+                portal.teleport(this);
+            }
         }
 
         if (posX == getX() && posY == getY() && !isHill(Direction.FOR)) {
@@ -304,7 +308,6 @@ public class Rover extends Actor {
         }
 
         public void act() {
-
         }
 
         /**
