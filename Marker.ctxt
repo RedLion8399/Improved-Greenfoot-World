@@ -1,8 +1,9 @@
 #BlueJ class context
 comment0.target=Marker
+comment0.text=\r\n\ A\ marker\ that\ can\ be\ placed\ by\ the\ rover\ to\ mark\ locations.\r\n\ \r\n\ @author\ Paul\ Jonas\ Dohle\r\n\ @version\ 27\ September\ 2025\r\n
 comment1.params=
 comment1.target=Marker()
 comment2.params=
 comment2.target=void\ act()
-comment2.text=\r\n\ Die\ Anweisungen\ der\ Methode\ act\ werden\ ausgef\u00FChrt,\ wenn\ der\ Act-Button\r\n\ im\ Hauptfenster\ geklickt\ wird.\r\n
+comment2.text=\r\n\ If\ the\ button\ "act"\ in\ the\ main\ window\ is\ clicked\ this\ method\ is\ executed.\r\n\ The\ button\ "run"\ would\ execute\ this\ method\ as\ well,\ but\ in\ a\ loop.\r\n
 numComments=3

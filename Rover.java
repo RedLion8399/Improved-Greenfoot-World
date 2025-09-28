@@ -14,7 +14,6 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Rover extends Actor {
 
     private Display display;
-    private MessagePriority messagePriority = MessagePriority.INFO;
 
     /**
      * If the button "act" in the main window is clicked this method is executed.
@@ -33,9 +32,9 @@ public class Rover extends Actor {
         int posY = getY();
 
         if (isHill(Direction.FOR)) {
-            message("Zu steil!", MessagePriority.ERROR);
+            display.message("Zu steil!", MessagePriority.ERROR);
         } else if (getRotation() == 270 && getY() == 1) {
-            message("Ich kann mich nicht bewegen", MessagePriority.ERROR);
+            display.message("Ich kann mich nicht bewegen", MessagePriority.ERROR);
         } else {
             move(1);
             Greenfoot.delay(1);
@@ -46,7 +45,7 @@ public class Rover extends Actor {
         }
 
         if (posX == getX() && posY == getY() && !isHill(Direction.FOR)) {
-            message("Ich kann mich nicht bewegen", MessagePriority.ERROR);
+            display.message("Ich kann mich nicht bewegen", MessagePriority.ERROR);
         }
     }
 
@@ -93,7 +92,7 @@ public class Rover extends Actor {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            message("Bedingung nicht korrekt", MessagePriority.ERROR);
+            display.message("Bedingung nicht korrekt", MessagePriority.ERROR);
         }
     }
 
@@ -109,7 +108,7 @@ public class Rover extends Actor {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            message("Bedingung nicht korrekt", MessagePriority.ERROR);
+            display.message("Bedingung nicht korrekt", MessagePriority.ERROR);
         }
     }
 
@@ -122,7 +121,7 @@ public class Rover extends Actor {
         switch (richtung) {
             case RIGHT -> turn(90);
             case LEFT -> turn(-90);
-            default -> message("Befehl nicht korrekt", MessagePriority.ERROR);
+            default -> display.message("Befehl nicht korrekt", MessagePriority.ERROR);
         }
     }
 
@@ -143,7 +142,7 @@ public class Rover extends Actor {
         switch (direction) {
             case "RIGHT", "right", "rechts", "R", "r" -> turn(Direction.RIGHT);
             case "LEFT", "left", "links", "L", "l" -> turn(Direction.LEFT);
-            default -> message(direction + " ist kein g\u00FCltiger Befehl", MessagePriority.ERROR);
+            default -> display.message(direction + " ist kein g\u00FCltiger Befehl", MessagePriority.ERROR);
         }
     }
 
@@ -155,12 +154,12 @@ public class Rover extends Actor {
      */
     public boolean isStoneBelow() {
         if (getOneIntersectingObject(Gestein.class) != null) {
-            message("Gestein gefunden!");
+            display.message("Gestein gefunden!");
             return true;
 
         }
 
-        message("Kein Gestein vorhanden!", MessagePriority.WARNING);
+        display.message("Kein Gestein vorhanden!", MessagePriority.WARNING);
         return false;
     }
 
@@ -202,7 +201,7 @@ public class Rover extends Actor {
         }
 
         if (direction != Direction.FOR && direction != Direction.LEFT && direction != Direction.RIGHT) {
-            message("Befehl nicht korrekt!", MessagePriority.ERROR);
+            display.message("Befehl nicht korrekt!", MessagePriority.ERROR);
         }
 
         return false;
@@ -217,7 +216,7 @@ public class Rover extends Actor {
             Greenfoot.delay(1);
             removeTouching(Gestein.class);
         } else {
-            message("Hier ist kein Gestein", MessagePriority.WARNING);
+            display.message("Hier ist kein Gestein", MessagePriority.WARNING);
         }
     }
 
@@ -248,11 +247,11 @@ public class Rover extends Actor {
      */
     public boolean isMarker() {
         if (getOneIntersectingObject(Marker.class) != null) {
-            message("Marke gefunden!");
+            display.message("Marke gefunden!");
             return true;
         }
 
-        message("Keine Marke vorhanden!", MessagePriority.WARNING);
+        display.message("Keine Marke vorhanden!", MessagePriority.WARNING);
         return false;
     }
 
@@ -265,70 +264,12 @@ public class Rover extends Actor {
         }
     }
 
-    private void message(String messageText, MessagePriority priority) {
-        if (display == null) {
-            return;
-        } else if (this.messagePriority.getPriority() > priority.getPriority()) {
-            return;
-        }
-
-        display.display(messageText);
-        Greenfoot.delay(1);
-        display.delete();
-    }
-
-    private void message(String messageText) {
-        message(messageText, MessagePriority.INFO);
-    }
-
-    private void displayAusschalten() {
-        getWorld().removeObject(display);
-
-    }
-
     protected void addedToWorld(World world) {
-
         setImage("images/rover.png");
-        world = getWorld();
-        display = new Display();
-        display.setImage("images/nachricht.png");
-        world.addObject(display, 7, 0);
+        display = Display.getInstance(getWorld());
         if (getY() == 0) {
             setLocation(getX(), 1);
         }
-        display.display("Ich bin bereit");
-
-    }
-
-    class Display extends Actor {
-        GreenfootImage bild;
-
-        public Display() {
-            bild = getImage();
-        }
-
-        public void act() {
-        }
-
-        /**
-         * Clears the current text from the display and then
-         * writes the given text onto the display.
-         * 
-         * @param messageText The text to write onto the display.
-         */
-        public void display(String messageText) {
-            delete();
-            getImage().drawImage(new GreenfootImage(messageText, 25, Color.BLACK, new Color(0, 0, 0, 0)), 10, 10);
-
-        }
-
-        /**
-         * Clears the text from the display
-         */
-        public void delete() {
-            getImage().clear();
-            setImage("images/nachricht.png");
-        }
-
+        display.message("Ich bin bereit");
     }
 }

@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=Display
+comment0.text=\r\n\ The\ Display\ is\ a\ singleton\ that\ displays\ information\r\n\ in\ abox\ as\ a\ console.\r\n\ \r\n\ @author\ Paul\ Jonas\r\n\ @version\ 28.09.2025\r\n
+comment1.params=priority\ world
+comment1.target=Display(MessagePriority,\ greenfoot.World)
+comment2.params=priority\ world
+comment2.target=Display\ getInstance(MessagePriority,\ greenfoot.World)
+comment2.text=\r\n\ Returns\ the\ single\ instance\ of\ the\ Display\ class.\r\n\ If\ no\ instance\ exists,\ a\ new\ one\ is\ created.\r\n\ \r\n\ @param\ priority\ The\ minimum\ priority\ of\ messages\ to\ display.\r\n\ @param\ world\ \ \ \ The\ world\ to\ add\ the\ display\ to.\r\n\ \r\n\ @return\ The\ single\ instance\ of\ the\ Display\ class.\r\n
+comment3.params=world
+comment3.target=Display\ getInstance(greenfoot.World)
+comment3.text=\r\n\ Returns\ the\ single\ instance\ of\ the\ Display\ class.\r\n\ If\ no\ instance\ exists,\ a\ new\ one\ is\ created\ with\r\n\ the\ default\ priority\ of\ INFO.\r\n\ \r\n\ @param\ world\r\n\ \r\n\ @return\ The\ single\ instance\ of\ the\ Display\ class.\r\n
+comment4.params=messageText
+comment4.target=void\ display(java.lang.String)
+comment4.text=\r\n\ Clears\ the\ current\ text\ from\ the\ display\ and\ then\r\n\ writes\ the\ given\ text\ onto\ the\ display.\r\n\ \r\n\ @param\ messageText\ The\ text\ to\ write\ onto\ the\ display.\r\n
+comment5.params=
+comment5.target=void\ delete()
+comment5.text=\r\n\ Clears\ the\ text\ from\ the\ display\r\n
+comment6.params=
+comment6.target=void\ shutdown()
+comment6.text=\r\n\ The\ display\ is\ removed\ from\ the\ world.\r\n
+comment7.params=messageText\ priority
+comment7.target=void\ message(java.lang.String,\ MessagePriority)
+comment7.text=\r\n\ Writes\ the\ given\ text\ onto\ the\ display\ if\ the\ priority\ is\ high\ enough.\r\n\ If\ the\ priority\ of\ the\ message\ is\ higher\ than\ the\ priority\ of\ the\ display,\r\n\ the\ text\ is\ not\ written.\r\n\ After\ writing\ the\ text,\ the\ method\ waits\ for\ 1\ second\ and\ then\ clears\ the\r\n\ display.\r\n\ \r\n\ @param\ messageText\ The\ text\ to\ write\ onto\ the\ display.\r\n\ @param\ priority\ \ \ \ The\ priority\ of\ the\ message.\ If\ the\ priority\ of\ the\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ message\ is\ higher\ than\ the\ priority\ of\ the\ display,\ the\r\n\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ text\ is\ not\ written.\r\n
+comment8.params=messageText
+comment8.target=void\ message(java.lang.String)
+comment8.text=\r\n\ Writes\ the\ given\ text\ onto\ the\ display\ with\ the\ default\ priority\ of\ INFO.\r\n\ \r\n\ @param\ messageText\ The\ text\ to\ write\ onto\ the\ display.\r\n
+numComments=9
