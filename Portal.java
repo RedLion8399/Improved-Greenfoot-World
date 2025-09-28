@@ -9,7 +9,7 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Portal extends Actor {
 
     private Portal linkedPortal;
-    private Display display = Display.getInstance(getWorld());
+    private Display display;
 
     /**
      * Creates a new blue portal.
@@ -17,6 +17,7 @@ public class Portal extends Actor {
      */
     public Portal() {
         setImage("images/portalBlue.png");
+        display = Display.getInstance(getWorld());
     }
 
     private Portal(int x, int y, Portal linkedPortal) {

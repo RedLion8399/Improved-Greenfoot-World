@@ -73,6 +73,11 @@ public class Display extends Actor {
      */
     public void shutdown() {
         instance = null;
+        World world = getWorld();
+        if (world != null) {
+            world.removeObject(this);
+        }
+        instance = null;
     }
 
     /**
