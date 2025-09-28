@@ -21,7 +21,6 @@ public class Rover extends Actor {
      * The button "run" would execute this method as well, but in a loop.
      */
     public void act() {
-        drive(2);
     }
 
     /**
