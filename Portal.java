@@ -7,10 +7,18 @@ import greenfoot.*; // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version 27 September 2025
  */
 public class Portal extends Actor {
+
+    private Portal linkedPortal;
+
+    public Portal() {
+        setImage("images/portalBlue.png");
+    }
+
     /**
      * If the button "act" in the main window is clicked this method is executed.
      * The button "run" would execute this method as well, but in a loop.
      */
     public void act() {
     }
+
 }
